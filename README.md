@@ -62,6 +62,12 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 - raymarch
   - https://wgld.org/d/glsl/
 
+## テクスチャ
+- amiya.png
+  - https://arknights.wikiru.jp/index.php?%A5%A2%A1%BC%A5%DF%A5%E4
+- amina.jpeg
+  - ネットでの拾い物（オリジナルの出処不明）
+
 ## 使い方
 VSCodeでファイルを開いて、glslCanvas を表示してください。
 
@@ -71,4 +77,4 @@ VSCodeでファイルを開いて、glslCanvas を表示してください。
 最終目標はレイマーチとしておく。
 
 ## ライセンス
-MIT License…に設定していますが、ご自由にお使いくださいライセンスです。
+他のリポジトリの流れでMIT License…に設定していますが、ご自由にお使いくださいライセンスです。
