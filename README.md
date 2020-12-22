@@ -65,8 +65,8 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 ## テクスチャ
 - amiya.png
   - https://arknights.wikiru.jp/index.php?%A5%A2%A1%BC%A5%DF%A5%E4
-- amina.jpeg
-  - ネットでの拾い物（オリジナルの出処不明）
+- W_01.png
+  - https://arknights.wikiru.jp/index.php?W%28%A5%D7%A5%EC%A5%A4%A5%A2%A5%D6%A5%EB%29
 
 ## 使い方
 VSCodeでファイルを開いて、glslCanvas を表示してください。
