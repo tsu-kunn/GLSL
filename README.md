@@ -56,9 +56,11 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 - quaternion_test.glsl
   - クォータニオン関数のテスト
 - raymarch.fs
-  - レイマーチの勉強（基本編）
+  - レイマーチングの勉強（基本編）
 - raymarch2.fs
-  - レイマーチの勉強（応用編）
+  - レイマーチングの勉強（応用編）
+- raymarch3.fs
+  - レイマーチングの勉強（応用編2）
 - sample.glsl
   - glsl-vanvas のサンプルコード
 - sepia.glsl
