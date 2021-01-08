@@ -7,6 +7,14 @@ GLSLの勉強で書いたシェーダーソースコードです。
 Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行できる形式となっています。  
 通常のGLSLで使用する場合は、整形作業といったひと手間が必要です。
 
+これまで非公開リポジトリで勉強を進めて、形になったらここにマージしていましたが、  
+2021/1/8 からGLSLの勉強リポジトリに昇格させることにしました。  
+更新頻度が少し上がる…かも？
+
+※2021/1/8  
+　glslfanに一部のシェーディングを移植しました。  
+　詳しくは下記の glslfan を参照してください。
+
 ## フォルダ構成
 
 - .vscode
@@ -61,6 +69,8 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
   - レイマーチングの勉強（応用編）
 - raymarch3.fs
   - レイマーチングの勉強（応用編2）
+- raymarch4.fs
+  - レイマーチングの勉強（シェーディングとマルチライト）
 - sample.glsl
   - glsl-vanvas のサンプルコード
 - sepia.glsl
@@ -94,13 +104,31 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 - W_01.png
   - https://arknights.wikiru.jp/index.php?W%28%A5%D7%A5%EC%A5%A4%A5%A2%A5%D6%A5%EB%29
 
+## glslfan
+glslfanに一部を移植しているので確認することができます。
+
+- light anime
+  - https://glslfan.com/?channel=-MQH_QxYFIfBdVu7w2Am&viewer=true
+- raymarch2
+  - https://glslfan.com/?channel=-MQUoAPXc70oG0MVHUt8&viewer=true
+- raymarch3
+  - https://glslfan.com/?channel=-MQHfoNm9E0hu-Qg5Hgg&viewer=true
+- phong shading & multi light
+  - https://glslfan.com/?channel=-MQW5edD_h4wHtTt49vA&viewer=true
+- sepia
+  - https://glslfan.com/?channel=-MQW5zyenMDibNQtZamC&viewer=true
+- nega
+  - https://glslfan.com/?channel=-MQWB_waWM95M1VxxNEu&viewer=true
+- monochroem
+  - https://glslfan.com/?channel=-MQWBzwo1UOqr7UJgN54&viewer=true
+
 ## 使い方
 VSCodeでファイルを開いて、glslCanvas を表示してください。
 
 ## 今後
 勉強で作成したシェーダーファイルがある程度たまったら追加していきます。  
 マルチテクスチャやバッファが使えるので、バンプマップや影の勉強したい。  
-最終目標はレイマーチとしておく。
+最終目標はレイマーチングとしておく。
 
 ## ライセンス
 他のリポジトリの流れでMIT License…に設定していますが、ご自由にお使いくださいライセンスです。
