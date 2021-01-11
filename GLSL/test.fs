@@ -23,7 +23,9 @@ bool inCircle(vec2 pos, vec2 offset, float size) {
 
 bool inRect(vec2 pos, vec2 offset, float size) {
     vec2 q = (pos - offset) / size;
-    return (abs(q.x) < 1.0 && abs(q.y) < 1.0 ? true: false);
+    float m = 0.5 * sin(u_time * 3.0 + q.x * 2.0);
+
+    return (abs(q.x) < 1.0 && abs(q.y + m) < 1.0 ? true: false);
 }
 
 bool inEllipse(vec2 pos, vec2 offset, vec2 prop, float size) {
