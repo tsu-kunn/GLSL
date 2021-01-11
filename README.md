@@ -91,6 +91,8 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
   - 波の表現（旗のなびき）
 - wave2.glsl
   - 波の表現2（より波を強く）
+- wave3.glsl
+  - 波の表現（旗のなびき）をフラグメントシェーダーで実施
 
 ## 参考
 - quaternion
