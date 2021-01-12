@@ -70,6 +70,8 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
   - レイマーチングの勉強（応用編2）
 - raymarch4.fs
   - レイマーチングの勉強（シェーディングとマルチライト）
+- raymarch5.fs
+  - レイマーチングの勉強（スポットライト）
 - sample.glsl
   - glsl-vanvas のサンプルコード
 - sepia.glsl
