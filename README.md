@@ -128,6 +128,9 @@ glslfanに一部を移植しているので確認することができます。
   - https://glslfan.com/?channel=-MQlYhCKvl3gEnFnA99V&viewer=true
 - wave3
   - https://glslfan.com/?channel=-MQlQUVtJcqP1vwom27Q&viewer=true
+- SpotLight
+  - https://glslfan.com/?channel=-MQoTLbcHDeZ0urvxmxO&viewer=true
+
 
 ## 使い方
 VSCodeでファイルを開いて、glslCanvas を表示してください。
