@@ -16,7 +16,6 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 　詳しくは下記の glslfan を参照してください。
 
 ## フォルダ構成
-
 - .vscode
   - VSCode Projectsのローカル設定
 - GLSL
@@ -123,6 +122,10 @@ glslfanに一部を移植しているので確認することができます。
   - https://glslfan.com/?channel=-MQWB_waWM95M1VxxNEu&viewer=true
 - monochroem
   - https://glslfan.com/?channel=-MQWBzwo1UOqr7UJgN54&viewer=true
+- noise
+  - https://glslfan.com/?channel=-MQlYhCKvl3gEnFnA99V&viewer=true
+- wave3
+  - https://glslfan.com/?channel=-MQlQUVtJcqP1vwom27Q&viewer=true
 
 ## 使い方
 VSCodeでファイルを開いて、glslCanvas を表示してください。
