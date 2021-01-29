@@ -10,7 +10,6 @@ uniform vec3 u_camera;
 const float PI = 3.14159265;
 const float PI2 = 6.28318531;
 
-const float sphereSize = 1.0; // 球の半径
 const vec3 lightDir = vec3(-0.577, 0.577, 0.577); // ライトの位置
 
 const float angle = 60.0;
@@ -45,13 +44,14 @@ float distanceFloor(vec3 p) {
     return (dot(p, vec3(0.0, 1.0, 0.0)) + 1.0);
 }
 
-float distanceSphere(vec3 p) {
-    return (length(p) - sphereSize);
+float distanceSphere(vec3 p, float s) {
+    // s: 球の半径
+    return (length(p) - s);
 }
 
-float distanceBox(vec3 p) {
-    // 箱(vec3: 箱の大きさ, 0.05: 角の丸み)
-    return (length(max(abs(p) - vec3(2.0, 0.1, 0.5), 0.0)) - 0.1);
+float distanceBox(vec3 p, vec3 r, float c) {
+    // 箱(r: 箱の大きさ, c: 角の丸み)
+    return (length(max(abs(p) - r, 0.0)) - c);
 }
 
 // r.x: 円柱の太さ(半径)
@@ -66,8 +66,8 @@ float distanceFunc(vec3 p) {
     vec3 q2 = rotate(p + vec3(0.0, -1.5, 0.0), radians(u_time * 50.0), vec3(1.0, 0.0, -1.0));
 
     float d1 = distanceFloor(p);
-    float d2 = distanceBox(q2);
-    float d3 = distanceSphere(q1);
+    float d2 = distanceBox(p, vec3(2.0, 0.1, 0.5), 0.05);
+    float d3 = distanceSphere(p, 1.0);
 
     float dst = smoothMin(d1, min(d2, d3), 8.0);
 
