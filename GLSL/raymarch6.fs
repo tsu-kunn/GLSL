@@ -12,9 +12,6 @@ const float PI2 = 6.28318531;
 
 const vec3 lightDir = vec3(-0.577, 0.577, 0.577); // ライトの位置
 
-const float angle = 60.0;
-const float fov = angle * 0.5 * PI / 180.0;
-
 
 vec3 rotate(vec3 p, float angle, vec3 axis){
     vec3 n = normalize(axis);
@@ -41,7 +38,7 @@ float distanceTorus(vec3 p) {
 }
 
 float distanceFloor(vec3 p) {
-    return (dot(p, vec3(0.0, 1.0, 0.0)) + 1.0);
+    return (dot(p, vec3(0.0, 1.0, 0.25)) + 1.0);
 }
 
 float distanceSphere(vec3 p, float s) {
@@ -63,13 +60,18 @@ float distanceCylinder(vec3 p, vec2 r) {
 
 float distanceFunc(vec3 p) {
     vec3 q1 = rotate(p, radians(u_time * 50.0), vec3(0.0, 1.0, 0.0));
-    vec3 q2 = rotate(p + vec3(0.0, -1.5, 0.0), radians(u_time * 50.0), vec3(1.0, 0.0, -1.0));
+    vec3 q2 = rotate(p + vec3(0.0, -0.0, 0.0), radians(u_time * 50.0), vec3(1.0, 0.0, -1.0));
 
-    float d1 = distanceFloor(p);
-    float d2 = distanceBox(p, vec3(2.0, 0.1, 0.5), 0.05);
-    float d3 = distanceSphere(p, 1.0);
+    float d0 = distanceFloor(p + vec3(0.0, 1.0, 0.0));
+    float d1 = distanceBox(p + vec3(0.0, -0.0, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d2 = distanceBox(p + vec3(0.0, -3.0, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d3 = distanceBox(p + vec3(-1.5, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d4 = distanceBox(p + vec3(1.5, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d5 = distanceSphere(p + vec3(0.0, -1.5, 0.0), 1.0);
 
-    float dst = smoothMin(d1, min(d2, d3), 8.0);
+    float min0 = min(d0, d5);
+    float min1 = min(min(min(d1, d2), d3), d4);
+    float dst = smoothMin(min0, min1, 8.0);
 
     return dst;
 }
@@ -114,7 +116,12 @@ void main() {
     vec3 cPos = vec3(u_camera.x - 0.0, u_camera.y + 4.0, u_camera.z + 10.0);
 
     // ray
-    vec3 ray = normalize(vec3(sin(fov) * pos.x, sin(fov) * pos.y, -cos(fov)));
+    const vec3 cDir = vec3(0.0, -0.3, -1.0);
+    const vec3 cUp  = vec3(0.0, 1.0, 0.0);
+
+    vec3 cSide = cross(cDir, cUp);
+    float targetDepth = 3.0;
+    vec3 ray = normalize(cSide * pos.x + cUp * pos.y + cDir * targetDepth);
 
     // marching loop
     float dist = 0.0;   // レイとオブジェクト間の最短距離
