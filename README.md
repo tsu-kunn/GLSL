@@ -73,7 +73,7 @@ Visual Studio Code(以下 VSCode)の拡張である、**glsl-canvas** で実行�
 - raymarch5.fs
   - レイマーチングの勉強（スポットライト）
 - sample.glsl
-  - glsl-vanvas のサンプルコード
+  - glsl-canvas のサンプルコード
 - sepia.glsl
   - セピア調表現
 - shape.glsl
