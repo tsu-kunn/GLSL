@@ -62,11 +62,19 @@ float distanceFunc(vec3 p) {
     vec3 q1 = rotate(p, radians(u_time * 50.0), vec3(0.0, 1.0, 0.0));
     vec3 q2 = rotate(p + vec3(0.0, -0.0, 0.0), radians(u_time * 50.0), vec3(1.0, 0.0, -1.0));
 
+    float s = sin(u_time * 0.5);
+    float c = cos(u_time * 0.5);
+    float mv = s * 0.5;
+
+    mat3 rotY = mat3(  c, 1.0,   s,
+                     0.0, 1.0, 0.0,
+                      -s, 0.0,   c);
+
     float d0 = distanceFloor(p + vec3(0.0, 1.0, 0.0));
-    float d1 = distanceBox(p + vec3(0.0, -0.0, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
-    float d2 = distanceBox(p + vec3(0.0, -3.0, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
-    float d3 = distanceBox(p + vec3(-1.5, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
-    float d4 = distanceBox(p + vec3(1.5, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d1 = distanceBox(p + vec3(0.0, 0.0 + mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d2 = distanceBox(p + vec3(0.0, -3.0 - mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d3 = distanceBox(p + vec3(-1.5 - mv, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d4 = distanceBox(p + vec3(1.5 + mv, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
     float d5 = distanceSphere(p + vec3(0.0, -1.5, 0.0), 1.0);
 
     float min0 = min(d0, d5);
