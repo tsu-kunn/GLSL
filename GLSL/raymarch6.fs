@@ -66,9 +66,17 @@ float distanceFunc(vec3 p) {
     float c = cos(u_time * 0.5);
     float mv = s * 0.5;
 
-    mat3 rotY = mat3(  c, 1.0,   s,
+    mat3 rotX = mat3(1.0, 0.0, 0.0,
+                     0.0,   c,   s,
+                     0.0,  -s,   c);
+
+    mat3 rotY = mat3(  c, 1.0,  -s,
                      0.0, 1.0, 0.0,
-                      -s, 0.0,   c);
+                       s, 0.0,   c);
+
+    mat3 rotZ = mat3(  c,   s, 0.0,
+                      -s,   c, 0.0,
+                     0.0, 0.0, 1.0);
 
     float d0 = distanceFloor(p + vec3(0.0, 1.0, 0.0));
     float d1 = distanceBox(p + vec3(0.0, 0.0 + mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
