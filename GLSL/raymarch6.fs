@@ -12,6 +12,9 @@ const float PI2 = 6.28318531;
 
 const vec3 lightDir = vec3(-0.577, 0.577, 0.577); // ライトの位置
 
+int anim_step = 0;
+float anim_cnt0 = 0.0;
+float anim_cnt1 = 0.0;
 
 vec3 rotate(vec3 p, float angle, vec3 axis){
     vec3 n = normalize(axis);
@@ -59,13 +62,25 @@ float distanceCylinder(vec3 p, vec2 r) {
 }
 
 float distanceFunc(vec3 p) {
-    vec3 q1 = rotate(p, radians(u_time * 50.0), vec3(0.0, 1.0, 0.0));
-    vec3 q2 = rotate(p + vec3(0.0, -0.0, 0.0), radians(u_time * 50.0), vec3(1.0, 0.0, -1.0));
+    if (anim_step == 0 ) {
+        anim_cnt0 = u_time * 50.0;
+
+        // if (mod(u_time, 45.0) <= 0.5) anim_step++;
+    } else if (anim_step == 1) {
+        anim_cnt1 = u_time * 50.0;
+    } else {
+        anim_step = 0;
+        anim_cnt0 = 0.0;
+        anim_cnt1 = 0.0;
+    }
+
+    vec3 q0 = rotate(p + vec3(0.0, 0.0, 0.0), radians(anim_cnt0), vec3(0.0, 1.0, 0.0));
+    vec3 q1 = rotate(p + vec3(0.0, -2.0, 0.0), radians(anim_cnt1), vec3(1.0, 0.0, 0.0));
 
     float s = sin(u_time * 0.5);
     float c = cos(u_time * 0.5);
     float mv = s * 0.5;
-
+/*
     mat3 rotX = mat3(1.0, 0.0, 0.0,
                      0.0,   c,   s,
                      0.0,  -s,   c);
@@ -77,15 +92,17 @@ float distanceFunc(vec3 p) {
     mat3 rotZ = mat3(  c,   s, 0.0,
                       -s,   c, 0.0,
                      0.0, 0.0, 1.0);
+*/
 
-    float d0 = distanceFloor(p + vec3(0.0, 1.0, 0.0));
-    float d1 = distanceBox(p + vec3(0.0, 0.0 + mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
-    float d2 = distanceBox(p + vec3(0.0, -3.0 - mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
-    float d3 = distanceBox(p + vec3(-1.5 - mv, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
-    float d4 = distanceBox(p + vec3(1.5 + mv, -1.5, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
-    float d5 = distanceSphere(p + vec3(0.0, -1.5, 0.0), 1.0);
+    // float d0 = distanceFloor(p + vec3(0.0, 6.5, 0.0));
+    float d1 = distanceBox(q1 + vec3(0.0, 2.0 + mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d2 = distanceBox(q1 + vec3(0.0, -2.0 - mv, 0.0), vec3(1.6, 0.1, 1.5), 0.05);
+    float d3 = distanceBox(q0 + vec3(-2.0 - mv, -2.0, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d4 = distanceBox(q0 + vec3(2.0 + mv, -2.0, 0.0), vec3(0.1, 1.5, 1.5), 0.05);
+    float d5 = distanceSphere(p + vec3(0.0, -2.0, 0.0), 1.0);
 
-    float min0 = min(d0, d5);
+    // float min0 = min(d0, d5);
+    float min0 = d5;
     float min1 = min(min(min(d1, d2), d3), d4);
     float dst = smoothMin(min0, min1, 8.0);
 
@@ -158,7 +175,7 @@ void main() {
     lp = normalize(lp);
 
     // hit check
-    vec3 color = vec3(1.0);
+    vec3 color = vec3(0.7);
     float shadow = 1.0;
 
     if (abs(dist) < 0.001) {
@@ -171,7 +188,7 @@ void main() {
 
         // shadow
         // TODO: 影の重なりに対応(重なった部分は影なしで計算されている)
-        shadow = genShadow(rPos + normal * 0.001, lp);
+        // shadow = genShadow(rPos + normal * 0.001, lp);
 
         // UV or color
         float sphereNo = distanceColor(rPos);
@@ -186,7 +203,6 @@ void main() {
                 diff *= 0.7;
             }
         }
-
         color = color * diff + vec3(spec);
     }
 
