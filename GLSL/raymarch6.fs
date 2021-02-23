@@ -12,10 +12,6 @@ const float PI2 = 6.28318531;
 
 const vec3 lightDir = vec3(-0.577, 0.577, 0.577); // ライトの位置
 
-int anim_step = 0;
-float anim_cnt0 = 0.0;
-float anim_cnt1 = 0.0;
-
 vec3 rotate(vec3 p, float angle, vec3 axis){
     vec3 n = normalize(axis);
     float s = sin(angle);
@@ -62,20 +58,26 @@ float distanceCylinder(vec3 p, vec2 r) {
 }
 
 float distanceFunc(vec3 p) {
-    if (anim_step == 0 ) {
-        anim_cnt0 = u_time * 50.0;
+    float rad0 = 0.0;
+    float rad1 = 0.0;
 
-        // if (mod(u_time, 45.0) <= 0.5) anim_step++;
-    } else if (anim_step == 1) {
-        anim_cnt1 = u_time * 50.0;
-    } else {
-        anim_step = 0;
-        anim_cnt0 = 0.0;
-        anim_cnt1 = 0.0;
+    float cnt = mod(u_time, 360.0) * 10.0;
+
+    if (cnt <= 90.0) {
+        rad0 = cnt;
+    } else if (cnt <= 180.0) {
+        rad0 = 90.0;
+        rad1 = cnt - 90.0;
+    } else if (cnt <= 270.0) {
+        rad0 = cnt - 90.0;
+        rad1 = 90.0;
+    } else if (cnt <= 360.0) {
+        rad0 = 180.0;
+        rad1 = cnt - 180.0;
     }
 
-    vec3 q0 = rotate(p + vec3(0.0, 0.0, 0.0), radians(anim_cnt0), vec3(0.0, 1.0, 0.0));
-    vec3 q1 = rotate(p + vec3(0.0, -2.0, 0.0), radians(anim_cnt1), vec3(1.0, 0.0, 0.0));
+    vec3 q0 = rotate(p + vec3(0.0, 0.0, 0.0), radians(rad0), vec3(0.0, 1.0, 0.0));
+    vec3 q1 = rotate(p + vec3(0.0, -2.0, 0.0), radians(rad1), vec3(0.0, 0.0, 1.0));
 
     float s = sin(u_time * 0.5);
     float c = cos(u_time * 0.5);
